@@ -6,7 +6,7 @@ import (
 	"github.com/cloudwego/hertz/pkg/common/ut"
 	"github.com/cloudwego/hertz/pkg/route"
 	"github.com/dgrijalva/jwt-go"
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
@@ -42,7 +42,7 @@ func hmac(t *testing.T, method jwt.SigningMethod) {
 	claims := jwt.MapClaims{
 		"key": "api-mock-hmac",
 	}
-	hmacKey, _ := ioutil.ReadFile("../conf/hmac_key")
+	hmacKey, _ := os.ReadFile("../conf/hmac_key")
 	token, err := jwt.NewWithClaims(method, claims).SignedString(hmacKey)
 	if err != nil {
 		t.Log(err)
@@ -63,7 +63,7 @@ func rsa(t *testing.T, method jwt.SigningMethod) {
 	claims := jwt.MapClaims{
 		"key": "api-mock-rsa",
 	}
-	privateFile, _ := ioutil.ReadFile("../conf/private_key")
+	privateFile, _ := os.ReadFile("../conf/private_key")
 	privateKey, _ := jwt.ParseRSAPrivateKeyFromPEM(privateFile)
 	token, err := jwt.NewWithClaims(method, claims).SignedString(privateKey)
 	if err != nil {

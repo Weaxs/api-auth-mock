@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/dgrijalva/jwt-go"
-	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -24,7 +24,7 @@ func RsaApi(c context.Context, ctx *app.RequestContext) {
 		return
 	}
 	token = strings.TrimPrefix(token, tokenHeaderPrefix)
-	pubFile, _ := ioutil.ReadFile(rsaPublicKeyPath)
+	pubFile, _ := os.ReadFile(rsaPublicKeyPath)
 	pubKey, _ := jwt.ParseRSAPublicKeyFromPEM(pubFile)
 
 	claims, err := jwtParse(c, ctx, token, pubKey)
@@ -48,7 +48,7 @@ func HmacApi(c context.Context, ctx *app.RequestContext) {
 	}
 	token = strings.TrimPrefix(token, tokenHeaderPrefix)
 
-	hmacKey, _ := ioutil.ReadFile(hmacKeyPath)
+	hmacKey, _ := os.ReadFile(hmacKeyPath)
 	claims, err := jwtParse(c, ctx, token, hmacKey)
 	if err != nil {
 		return
