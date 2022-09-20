@@ -12,6 +12,11 @@ const (
 	tokenHeaderPrefix = "Bearer "
 )
 
+var (
+	hmacKeyPath      = "conf/hmac_key"
+	rsaPublicKeyPath = "conf/public_key.pub"
+)
+
 func RsaApi(c context.Context, ctx *app.RequestContext) {
 	token := ctx.Request.Header.Get(authHeader)
 	if token == "" || !strings.HasPrefix(token, tokenHeaderPrefix) {
@@ -19,7 +24,7 @@ func RsaApi(c context.Context, ctx *app.RequestContext) {
 		return
 	}
 	token = strings.TrimPrefix(token, tokenHeaderPrefix)
-	pubFile, _ := ioutil.ReadFile("conf/public_key.pub")
+	pubFile, _ := ioutil.ReadFile(rsaPublicKeyPath)
 	pubKey, _ := jwt.ParseRSAPublicKeyFromPEM(pubFile)
 
 	claims, err := jwtParse(c, ctx, token, pubKey)
@@ -43,7 +48,7 @@ func HmacApi(c context.Context, ctx *app.RequestContext) {
 	}
 	token = strings.TrimPrefix(token, tokenHeaderPrefix)
 
-	hmacKey, _ := ioutil.ReadFile("conf/hmac_key")
+	hmacKey, _ := ioutil.ReadFile(hmacKeyPath)
 	claims, err := jwtParse(c, ctx, token, hmacKey)
 	if err != nil {
 		return

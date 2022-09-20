@@ -9,19 +9,30 @@ import (
 func RegisterGroupRoute(h *server.Hertz) {
 	apiGroup := h.Group("/api")
 
+	// jwt api
 	jwtGroup := apiGroup.Group("/jwt/mock")
 	{
 		jwtGroup.GET("/hmac", api.HmacApi)
 		jwtGroup.GET("/rsa", api.RsaApi)
 	}
 
+	// basic api
 	basic := apiGroup.Group("/basic/mock")
 	{
+		// basic middleware
 		basic.Use(basic_auth.BasicAuth(map[string]string{
 			"account1": "password1",
 			"account2": "password2",
 			"account3": "password3",
 		}))
 		basic.GET("", api.BasicAuthApi)
+	}
+
+	// oauth api
+	api.RegisterOauthServer()
+	oauth := apiGroup.Group("/oauth/mock")
+	{
+		oauth.GET("/token", api.OauthToken)
+		oauth.GET("/authorize", api.OauthAuth)
 	}
 }
