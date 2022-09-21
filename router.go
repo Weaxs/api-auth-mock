@@ -14,6 +14,7 @@ func RegisterGroupRoute(h *server.Hertz) {
 	{
 		jwtGroup.GET("/hmac", api.HmacApi)
 		jwtGroup.GET("/rsa", api.RsaApi)
+		jwtGroup.GET("/ecdsa", api.EcdsaApi)
 	}
 
 	// basic api

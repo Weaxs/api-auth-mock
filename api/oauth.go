@@ -20,9 +20,9 @@ func RegisterOauthServer() {
 
 	// client memory store
 	clientStore := store.NewClientStore()
-	_ = clientStore.Set("000000", &models.Client{
-		ID:     "000000",
-		Secret: "999999",
+	_ = clientStore.Set("id0001", &models.Client{
+		ID:     "0001",
+		Secret: "secret0001",
 	})
 	manager.MapClientStorage(clientStore)
 
