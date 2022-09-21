@@ -4,20 +4,19 @@ Support api to mock request authentication.
 <table>
 <thead> 
 <tr> 
-<th colspan=2>mode 验证模式</th> 
-<th>api 接口</th> 
-<th>claims 断言用户</th> 
-<th>secret 密钥</th> 
+<th colspan=2 style="background:#F0F0F0F0;">mode</th> 
+<th style="background:#F0F0F0F0;">api</th> 
+<th style="background:#F0F0F0F0;">claims</th> 
+<th style="background:#F0F0F0F0;">secret</th> 
 </tr> 
 </thead> 
 <tbody> 
 <tr> 
-<td colspan=2 align="center">basic authentication</td> 
+<td colspan="2" style="text-align: center;">basic authentication</td> 
 <td>/api/basic/mock</td> 
 <td>
 
 ```json
-// Accounts
 {
   "account1": "password1",
   "account2": "password2",
@@ -29,23 +28,9 @@ Support api to mock request authentication.
 <td>none</td> 
 </tr> 
 <tr> 
-<td rowspan=3>jwt </td> 
-<td>HS256/HS384/HS512</td> 
+<td rowspan=3 style="text-align: center;">jwt </td> 
+<td style="text-align: center;">HS256<br/>HS384<br/>HS512</td> 
 <td>/api/jwt/mock/hmac</td> 
-<td>
-
-```json
-{
-  "key": "api-mock-rsa"
-}
-```
-
-</td> 
-<td>./conf/public_key.pub</td> 
-</tr> 
-<tr> 
-<td>RS256/RS384/RS512</td> 
-<td>/api/jwt/mock/rsa</td> 
 <td>
 
 ```json
@@ -57,5 +42,55 @@ Support api to mock request authentication.
 </td> 
 <td>./conf/hmac_key</td> 
 </tr> 
+<tr> 
+<td style="text-align: center;">RS256<br/>RS384<br/>RS512</td> 
+<td>/api/jwt/mock/rsa</td> 
+<td>
+
+```json
+{
+  "key": "api-mock-rsa"
+}
+```
+
+</td> 
+<td>public : ./conf/public_key.pub <br/> private : ./conf/private_key </td> 
+</tr> 
+<tr> 
+<td style="text-align: center;">ES256<br/>ES384<br/>ES512</td> 
+<td>/api/jwt/mock/ecdsa</td> 
+<td>
+
+```json
+{
+  "key": "api-mock-ecdsa"
+}
+```
+
+</td> 
+<td>
+es256 public : ./conf/ec256-public.pem<br/>
+es256 private : ./conf/ec256-private.pem<br/>
+es384 public : ./conf/ec384-public.pem<br/>
+es384 private : ./conf/ec384-private.pem<br/>
+es512 public : ./conf/ec512-public.pem<br/>
+es512 private : ./conf/ec512-private.pem<br/>
+</td> 
+</tr> 
+<tr>
+<td colspan="2" style="text-align: center;">oauth</td> 
+<td>token: /api/oauth/mock/token<br/>authorize: /api/oauth/mock/authorize</td> 
+<td>
+
+```json
+{
+  "client_id": "id0001",
+  "client_secret": "secret0001"
+}
+```
+
+</td>
+<td>none</td> 
+</tr>
 </tbody>
 </table>
