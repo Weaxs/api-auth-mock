@@ -1,4 +1,9 @@
 # api-auth-mock
+
+[![GoDoc](https://godoc.org/github.com/Weaxs/api-auth-mock?status.svg)](https://godoc.org/github.com/Weaxs/api-auth-mock)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Weaxs/api-auth-mock)](https://goreportcard.com/report/github.com/Weaxs/api-auth-mock)
+[![License](https://img.shields.io/github/license/Weaxs/api-auth-mock)](https://github.com/Weaxs/api-auth-mock/blob/main/LICENSE)
+
 Support api to mock request authentication.
 
 <table>
